@@ -2,7 +2,8 @@ import express from "express";
 const router = express.Router();
 import books from "../data/books.js";
 import { v4 as uuidv4 } from "uuid";
-import authenticateToken from "../middleware/authMiddleware.js";
+let authenticateToken = true;
+
 
 router.post("/:isbn/reviews", authenticateToken, (req, res) => {
   const { isbn } = req.params;
