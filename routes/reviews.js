@@ -2,10 +2,10 @@ import express from "express";
 const router = express.Router();
 import books from "../data/books.js";
 import { v4 as uuidv4 } from "uuid";
-let authenticateToken = true;
 
 
-router.post("/:isbn/reviews", authenticateToken, (req, res) => {
+
+router.post("/:isbn/reviews", (req, res) => {
   const { isbn } = req.params;
   const { review } = req.body;
   const book = books.find((book) => book.isbn === isbn);
@@ -25,7 +25,7 @@ router.post("/:isbn/reviews", authenticateToken, (req, res) => {
 });
 
 
-router.put('/:isbn/reviews', authenticateToken, (req, res) => {
+router.put('/:isbn/reviews',  (req, res) => {
   const { isbn } = req.params;
   const { comment, rating } = req.body;
 
@@ -42,7 +42,7 @@ router.put('/:isbn/reviews', authenticateToken, (req, res) => {
   res.json({ message: 'Review updated', review });
 })
 
-router.delete('/:isbn/reviews', authenticateToken, (req, res) => {
+router.delete('/:isbn/reviews', (req, res) => {
   const { isbn } = req.params;
 
   const book = books.find(b => b.isbn === isbn);
